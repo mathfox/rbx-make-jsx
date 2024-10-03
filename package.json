@@ -1,0 +1,35 @@
+{
+	"name": "@rbxts/make-jsx",
+	"version": "0.0.1",
+	"description": "JSX version of Make",
+	"main": "src/init.luau",
+	"types": "src/index.d.ts",
+	"files": ["src"],
+	"scripts": {
+		"build": "rbxtsc --type package",
+		"check": "bunx @biomejs/biome check --write",
+		"prepublishOnly": "bun run check && bun run build"
+	},
+	"keywords": ["roblox", "roblox-ts", "make", "jsx"],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mathfox/rbx-make-jsx.git"
+	},
+	"author": {
+		"name": "Ivan Leontev",
+		"url": "https://github.com/mathfox"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/mathfox/rbx-make-jsx/issues"
+	},
+	"homepage": "https://github.com/mathfox/rbx-make-jsx#readme",
+	"publishConfig": {
+		"access": "public"
+	},
+	"devDependencies": {
+		"@rbxts/compiler-types": "^3.0.0-types.0",
+		"@rbxts/types": "^1.0.809",
+		"typescript": "^5.7.0-dev.20240914"
+	}
+}
