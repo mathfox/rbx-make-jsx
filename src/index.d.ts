@@ -71,7 +71,8 @@ declare namespace Make {
 
 declare global {
 	namespace JSX {
-		interface Element extends Make.MakeElement<any, any> {}
+		//interface Element extends Make.MakeElement<any, any> {}
+		type Element = Instance;
 
 		type IntrinsicElements = {
 			[TKey in keyof Instances as Uncapitalize<TKey>]: Make.InstanceProps<
