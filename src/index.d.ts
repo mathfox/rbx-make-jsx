@@ -49,9 +49,7 @@ declare namespace MakeJsx {
 	function createElement<TProps extends {}>(type: string, props?: TProps | undefined, ...children: []): Instance;
 
 	function dom<TProps extends {}>(type: string, props?: TProps | undefined, ...children: []): Instance;
-}
 
-declare global {
 	namespace JSX {
 		//interface Element extends MakeJsx.MakeJsxElement<any, any> {}
 		type Element = Instance;
