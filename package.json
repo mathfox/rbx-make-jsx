@@ -5,11 +5,6 @@
 	"main": "src/init.luau",
 	"types": "src/index.d.ts",
 	"files": ["src"],
-	"scripts": {
-		"build": "rbxtsc --type package",
-		"check": "bunx @biomejs/biome check --write",
-		"prepublishOnly": "bun run check && bun run build"
-	},
 	"keywords": ["roblox", "roblox-ts", "make", "jsx"],
 	"repository": {
 		"type": "git",
