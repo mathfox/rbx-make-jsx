@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/make-jsx",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "JSX version of Make",
 	"main": "src/init.luau",
 	"types": "src/index.d.ts",

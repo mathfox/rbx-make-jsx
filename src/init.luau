@@ -24,21 +24,23 @@ local function createElement(type_: unknown, props: { [string]: any } | nil, ...
 	elseif type(type_) == "string" then
 		local instance = Instance.new(type_:sub(1, 1):upper() .. type_:sub(2)) :: any
 
-		for key, value in props :: any do
-			if key == "Event" then
-				for eventName, callback in value do
-					instance[eventName]:Connect(function(...)
-						callback(instance, ...)
-					end)
+		if props ~= nil then
+			for key, value in props :: any do
+				if key == "Event" then
+					for eventName, callback in value do
+						instance[eventName]:Connect(function(...)
+							callback(instance, ...)
+						end)
+					end
+				elseif key == "Change" then
+					for property, callback in value do
+						(instance :: Instance):GetPropertyChangedSignal(property):Connect(function()
+							callback(instance)
+						end)
+					end
+				else
+					instance[key] = value
 				end
-			elseif key == "Change" then
-				for property, callback in value do
-					(instance :: Instance):GetPropertyChangedSignal(property):Connect(function()
-						callback(instance)
-					end)
-				end
-			else
-				instance[key] = value
 			end
 		end
 
