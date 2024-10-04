@@ -53,6 +53,15 @@ local function createElement(type_: unknown, props: { [string]: any } | nil, ...
 						processChildren(child.children[index])
 					end
 				else
+					if (child :: Instance):IsA("GuiObject") then
+						(child :: GuiObject).Name = index :: any; -- it will be converted anyway
+						(child :: GuiObject).LayoutOrder = index
+					end
+
+					if (child :: Instance):IsA("UIGridStyleLayout") then
+						(child :: UIGridStyleLayout).SortOrder = Enum.SortOrder.LayoutOrder
+					end
+
 					(child :: Instance).Parent = instance :: Instance
 				end
 			end
