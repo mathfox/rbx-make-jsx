@@ -2,7 +2,21 @@
 --!native
 --!optimize 2
 
-local Fragment = {}
+type FragmentProperties = {
+	childrenCount: number,
+	children: { any },
+	parent: Instance | nil,
+}
+
+type FragmentImpl = {
+	__index: FragmentImpl,
+
+	new: (...any) -> Fragment,
+}
+
+type Fragment = typeof(setmetatable({} :: FragmentProperties, (nil :: any) :: FragmentImpl))
+
+local Fragment = {} :: FragmentImpl
 Fragment.__index = Fragment
 
 function Fragment.new(...: any)
@@ -18,6 +32,15 @@ local function is(prototype: any, value: any): boolean
 	return type(value) == "table" and getmetatable(value) == prototype
 end
 
+--local AUTOMATIC_PROPERTIES = {
+--	LayoutOrder = true,
+--	Name = true,
+--	SortOrder = true,
+--}
+
+--[[
+    Props should always be `nil` for fragments.
+]]
 local function createElement(type_: unknown, props: { [string]: any } | nil, ...: any)
 	if type_ == Fragment then
 		return Fragment.new(...)
@@ -39,6 +62,10 @@ local function createElement(type_: unknown, props: { [string]: any } | nil, ...
 						end)
 					end
 				else
+					--if AUTOMATIC_PROPERTIES[key] then
+					--	(instance :: Instance):SetAttribute(attribute)
+					--end
+
 					instance[key] = value
 				end
 			end
@@ -53,14 +80,14 @@ local function createElement(type_: unknown, props: { [string]: any } | nil, ...
 						processChildren(child.children[index])
 					end
 				else
-					if (child :: Instance):IsA("GuiObject") then
-						(child :: GuiObject).Name = index :: any; -- it will be converted anyway
-						(child :: GuiObject).LayoutOrder = index
-					end
-
-					if (child :: Instance):IsA("UIGridStyleLayout") then
-						(child :: UIGridStyleLayout).SortOrder = Enum.SortOrder.LayoutOrder
-					end
+					--					if (child :: Instance):IsA("GuiObject") then
+					--						(child :: GuiObject).Name = index :: any; -- it will be converted anyway
+					--						(child :: GuiObject).LayoutOrder = index
+					--					end
+					--
+					--					if (child :: Instance):IsA("UIGridStyleLayout") then
+					--						(child :: UIGridStyleLayout).SortOrder = Enum.SortOrder.LayoutOrder
+					--					end
 
 					(child :: Instance).Parent = instance :: Instance
 				end
