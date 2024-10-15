@@ -48,7 +48,5 @@ declare namespace MakeJsx {
 				Instances[TKey]
 			>;
 		};
-
-		type LibraryManagedAttributes<C, P> = P & { _hey: string };
 	}
 }
